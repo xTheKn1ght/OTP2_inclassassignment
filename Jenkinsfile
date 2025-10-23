@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-        jdk 'jdk17'
-        maven 'maven3'
+        jdk 'JDK 17'
+        maven 'Maven3'
     }
     environment {
         IMAGE_NAME = 'shoppingcart-app'
