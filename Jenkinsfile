@@ -19,14 +19,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building project with Maven...'
-                sh 'mvn clean compile'
+                bat 'mvn clean compile'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running unit tests...'
-                sh 'mvn test'
+                bat 'mvn test'
             }
             post {
                 always {
@@ -38,7 +38,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 echo 'Generating JaCoCo coverage report...'
-                sh 'mvn jacoco:report'
+                bat 'mvn jacoco:report'
             }
             post {
                 success {
@@ -56,20 +56,20 @@ pipeline {
         stage('Package') {
             steps {
                 echo 'Packaging application...'
-                sh 'mvn package -DskipTests'
+                bat 'mvn package -DskipTests'
             }
         }
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
-                sh "docker build -t ${IMAGE_NAME}:latest ."
+                bat "docker build -t ${IMAGE_NAME}:latest ."
             }
         }
         stage('Docker Push') {
             steps {
                 echo 'Pushing image to Docker Hub...'
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh """
+                    bat """
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         docker tag ${IMAGE_NAME}:latest ${DOCKERHUB_REPO}:latest
                         docker push ${DOCKERHUB_REPO}:latest
