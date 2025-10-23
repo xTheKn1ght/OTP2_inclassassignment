@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools{
+        jdk 'JDK 17'
+        maven 'Maven3'
+    }
     environment {
         IMAGE_NAME = 'shoppingcart-app'
         DOCKERHUB_REPO = 'aaronly123/shoppingcart-app'
