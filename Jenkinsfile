@@ -41,7 +41,8 @@ pipeline {
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
-                bat "docker build -t %IMAGE_NAME% ."
+                bat "docker build --no-cache -t %IMAGE_NAME% ."
+
             }
         }
         stage('Docker Push') {
