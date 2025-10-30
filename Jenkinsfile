@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tools{
+    tools {
         jdk 'JDK 17'
         maven 'Maven3'
     }
@@ -20,21 +20,16 @@ pipeline {
                 bat 'mvn clean compile'
             }
         }
-        stage('Test') {
+        stage('Test & Coverage') {
             steps {
-                echo 'Running unit tests...'
-                bat 'mvn test'
+                echo 'Running tests and generating coverage...'
+                bat 'mvn test jacoco:report'
             }
             post {
                 always {
-                    junit '**/target/surefire-reports/*.xml'
+                    junit '**\\target\\surefire-reports\\*.xml'
+                    jacoco execPattern: '**\\target\\jacoco.exec', classPattern: '**\\target\\classes', sourcePattern: '**\\src\\main\\java', inclusionPattern: '**/*.class'
                 }
-            }
-        }
-        stage('Code Coverage') {
-            steps {
-                echo 'Generating JaCoCo coverage report...'
-                bat 'mvn jacoco:report'
             }
         }
         stage('Package') {
