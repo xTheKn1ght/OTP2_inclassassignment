@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controller.ShoppingCartController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+    <ComboBox fx:id="languageBox" onAction="#onLanguageChange"/>
+    <TextField fx:id="numItemsField" promptText="%enter.items"/>
+    <Button fx:id="calcButton" text="%calculate" onAction="#onCalculate"/>
+    <VBox fx:id="itemBox"/>
+    <Label fx:id="totalLabel" text="%total.cost"/>
+</VBox>
