@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: mariadb:latest
+    container_name: shoppingcart-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopping_cart_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    container_name: shoppingcart-app
+    environment:
+      DB_URL: jdbc:mysql://db:3306/shopping_cart_db
+      DB_USER: user
+      DB_PASS: password
+      DISPLAY: host.docker.internal:0
+    depends_on:
+      - db

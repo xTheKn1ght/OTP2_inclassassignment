@@ -11,7 +11,7 @@ public class ShoppingCartApp extends Application {
         Locale locale = new Locale("en", "GB");
         ResourceBundle bundle = ResourceBundle.getBundle("MessageBundle", locale);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/shoppingcart.fxml"), bundle);
-        Scene scene = new Scene(loader.load(), 500, 400); // starting size, you can adjust
+        Scene scene = new Scene(loader.load(), 550, 450); // slightly larger window
         stage.setScene(scene);
         controller.ShoppingCartController controller = loader.getController();
         controller.setStage(stage);

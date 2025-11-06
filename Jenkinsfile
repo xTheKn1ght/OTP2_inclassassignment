@@ -57,6 +57,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying container with database...'
+                bat 'docker-compose up -d'
+            }
+        }
     }
     post {
         always {
