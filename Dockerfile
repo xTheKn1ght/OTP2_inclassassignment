@@ -1,4 +1,4 @@
-FROM openjdk:17-slim
+FROM eclipse-temurin:17-jdk-jammy
 
 RUN apt-get update && apt-get install -y \
     wget unzip libgtk-3-0 libx11-6 libxext6 libxrender1 libxtst6 libxi6 \
@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
 COPY target/ShoppingCartProject-1.0-SNAPSHOT.jar .
 
 RUN wget https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_linux-x64_bin-sdk.zip && \
